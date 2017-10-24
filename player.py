@@ -1,5 +1,7 @@
 from ocean import Ocean
 from square import Square
+from ship import Ship
+
 
 class Player:
 
@@ -24,9 +26,32 @@ class Player:
         square = self.view.find_object(coordinates)
         square.change_to_hit()
 
+    def put_ship_on_board(self, coordinates):
+        ship = Ship("Carrier")
+        prow = self.board.find_object(coordinates)
+        for line in self.board.ocean_board:
+            if prow in line:
+                line_index = self.board.ocean_board.index(line)
+                index = line.index(prow)
+                if not ship.vertical:
+                    for i in range(index, index + ship.lenght):
+                        line[i] = ship
+                else:
+                    for i in range(line_index, line_index + ship.lenght):
+                        self.board.ocean_board[i][index] = ship
+
 
 player1 = Player('player1')
+player1.put_ship_on_board("A2")
+player1.shoot_to_ship("A2")
+player1.print_boards()
+
+"""
+
 
 player1.print_boards()
 player1.shoot_to_ship("A2")
 player1.print_boards()
+player1.put_ship_on_board("A2")
+player1.print_boards()
+"""
