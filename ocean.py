@@ -1,22 +1,36 @@
 from square import Square
 
+
 class Ocean():
 
     def __init__(self):
         self.ocean_board = []
 
-    @staticmethod
-    def read_board_from_file():
+    def read_board_from_file(self):
+        index = 0
+        board = ['0', '1', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
         with open('board.txt', 'r') as file:
-            ocean = []
             for line in file:
-                ocean.append(list(line))
-        return ocean
+                counter = 0
+                line = list(line)
+                if index in range(2, 12):
+                    line[counter] = '#'
+                    for element in line:
+                        if element == ".":
+                            counter += 1
+                            element = Square("@", (board[index] + str(counter)))
+                            line[counter] = element
+                self.ocean_board.append(list(line))
+                index += 1
+        return self.ocean_board
 
-    def convert_to_squares(self):
-        ocean = read_board_from_file()
-        for line in ocean:
+    def print_board(self):
+        for line in self.ocean_board:
             for element in line:
-                if element == ".":
-                    Square(element)
+                if isinstance(element, Square):
+                    print(element.name)
 
+
+ocean = Ocean()
+ocean.read_board_from_file()
+ocean.print_board()
