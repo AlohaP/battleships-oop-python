@@ -18,7 +18,7 @@ class Ocean():
                     for element in line:
                         if element == ".":
                             counter += 1
-                            element = Square("@", (board[index] + str(counter)))
+                            element = Square(".", (board[index] + str(counter)))
                             line[counter] = element
                 self.ocean_board.append(list(line))
                 index += 1
@@ -28,7 +28,9 @@ class Ocean():
         for line in self.ocean_board:
             for element in line:
                 if isinstance(element, Square):
-                    print(element.name)
+                    print(" ".join(element.sign),end=" ")
+                else:
+                    print(" ".join(element),end=" ")
 
 
 ocean = Ocean()
