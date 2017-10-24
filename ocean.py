@@ -18,7 +18,7 @@ class Ocean():
                     for element in line:
                         if element == ".":
                             counter += 1
-                            element = Square(".", (board[index] + str(counter)))
+                            element = Square(".", (board[counter + 1] + str(index - 1)))
                             line[counter] = element
                 self.ocean_board.append(list(line))
                 index += 1
@@ -42,6 +42,3 @@ class Ocean():
 ocean = Ocean()
 ocean.read_board_from_file()
 ocean.print_board()
-ocean.find_object("A1")
-ocean.print_board()
-
