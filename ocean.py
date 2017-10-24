@@ -36,9 +36,8 @@ class Ocean():
         for line in self.ocean_board:
             for element in line:
                 if isinstance(element, Square) and element.name == coordinates:
-                    element.change_to_ship()
+                    return element
 
 
 ocean = Ocean()
 ocean.read_board_from_file()
-ocean.print_board()
