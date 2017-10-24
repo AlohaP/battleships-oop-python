@@ -32,7 +32,16 @@ class Ocean():
                 else:
                     print(" ".join(element),end=" ")
 
+    def find_object(self, coordinates):
+        for line in self.ocean_board:
+            for element in line:
+                if isinstance(element, Square) and element.name == coordinates:
+                    element.change_to_ship()
+
 
 ocean = Ocean()
 ocean.read_board_from_file()
 ocean.print_board()
+ocean.find_object("A1")
+ocean.print_board()
+
