@@ -42,8 +42,8 @@ class Player:
 
 
 player1 = Player('player1')
-player1.put_ship_on_board("A2")
-player1.shoot_to_ship("A2")
+player1.put_ship_on_board("C2")
+player1.shoot_to_ship("C2")
 player1.print_boards()
 
 """
