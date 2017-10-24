@@ -6,12 +6,12 @@ class Ship(Square):
 
     ships = {"Carrier": 5, "Battleship": 4, "Cruiser": 3, "Submarine": 3, "Destroyer": 2}
 
-    def __init__(self, name, sign="@"):
+    def __init__(self, name, vertical=False):
+        self.coordinates = []
         self.is_sunk = False
-        self.vertical = True
-        self.name = self.ships[name]
-        self.sign = sign
-        self.lenght = 5
+        self.vertical = vertical
+        self.name = name
+        self.lenght = self.ships[name]
 
 
 
