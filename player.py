@@ -40,6 +40,8 @@ class Player:
             else:
                 index = chars.index(cord[0])
                 cord[0] = chars[index + 1]
+        self.validate_if_ship_is_near(ship)
+
         return ship
 
     def check_if_square_sign_dot(self, square):
@@ -62,7 +64,14 @@ class Player:
                 check_if_place.append(self.check_if_square_sign_dot(square))
                 check_if_place.append(self.check_if_square_sign_dot(square1))
                 check_if_place.append(self.check_if_square_sign_dot(square2))
-        return check_if_place
+        return self.check_if_validate_positive(check_if_place)
+
+    def check_if_validate_positive(self, validation_table):
+        for element in validation_table:
+            if not element:
+                return False
+        return True
+
 
 """
 
