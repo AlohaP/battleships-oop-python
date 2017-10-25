@@ -13,6 +13,9 @@ class Ship(Square):
         self.name = name
         self.lenght = self.ships[name]
 
+    def change_squares_to_ship(self):
+        for square in self.coordinates:
+            square.change_to_ship()
 
 """
 ocean = Ocean()

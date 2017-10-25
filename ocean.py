@@ -3,6 +3,9 @@ from square import Square
 
 class Ocean():
 
+    W = '\033[0m'  # white (normal)
+    R = '\033[1;31m' # red
+
     def __init__(self):
         self.ocean_board = []
 
@@ -27,8 +30,13 @@ class Ocean():
     def print_board(self):
         for line in self.ocean_board:
             for element in line:
-                if isinstance(element, Square):
+
+                if isinstance(element, Square) and element.sunk == True:
+                    print('{}{}{}'.format(self.R, element.sign, self.W),end = " ")
+
+                elif isinstance(element, Square):
                     print(" ".join(element.sign),end=" ")
+                    
                 else:
                     print(" ".join(element),end=" ")
 

@@ -25,6 +25,7 @@ class Player:
 
         square = self.view.find_object(coordinates)
         square.change_to_hit()
+        square.change_to_sunk()
 
     def put_ship_on_board(self, name, coordinates, vertical):
         cord = list(coordinates)
@@ -34,7 +35,6 @@ class Player:
         for i in range(0, ship.lenght):
             square = self.board.find_object("".join([cord[0], str(cord[1])]))
             ship.coordinates.append(square)
-            square.change_to_ship()
             if ship.vertical:
                 cord[1] += 1
             else:
@@ -42,18 +42,41 @@ class Player:
                 cord[0] = chars[index + 1]
         return ship
 
+    def check_if_square_sign_dot(self, square):
+        if square.sign == ".":
+            return True
+        else:
+            return False
 
+    def validate_if_ship_is_near(self, ship):
+        chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+        check_if_place = []
+        for coordinate in ship.coordinates:
+            cord = list(coordinate.name)
+            cord[1] = int(cord[1])
+            index = chars.index(cord[0])
+            for index in range(chars.index(cord[0])-1, chars.index(cord[0])+2):
+                square = self.board.find_object("".join([chars[index], str(cord[1] + 1)]))
+                square1 = self.board.find_object("".join([chars[index], str(cord[1] - 1)]))
+                square2 = self.board.find_object("".join([chars[index], str(cord[1])]))
+                check_if_place.append(self.check_if_square_sign_dot(square))
+                check_if_place.append(self.check_if_square_sign_dot(square1))
+                check_if_place.append(self.check_if_square_sign_dot(square2))
+        return check_if_place
 
 """
 
 
 player1 = Player('player1')
-ship = player1.put_ship_on_board("Carrier", "C2", True)
-
+ship = player1.put_ship_on_board("Carrier", "B2", True)
+print(player1.validate_if_ship_is_near(ship))
+ship.change_squares_to_ship()
+print(player1.validate_if_ship_is_near(ship))
 player1.shoot_to_ship("C5")
 player1.print_boards()
 for coordinate in ship.coordinates:
     print(coordinate.name)
+<<<<<<< HEAD
 
 
 
@@ -79,3 +102,5 @@ player1.print_boards()
                         self.board.ocean_board[i][index] = ship
 """
 
+=======
+>>>>>>> 4c9caddefdc5e46e4dcc6f13680730322b235f07
