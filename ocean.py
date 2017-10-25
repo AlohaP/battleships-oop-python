@@ -39,5 +39,5 @@ class Ocean():
                     return element
 
 
-ocean = Ocean()
-ocean.read_board_from_file()
+# ocean = Ocean()
+# ocean.read_board_from_file()

@@ -6,7 +6,7 @@ class Ship(Square):
 
     ships = {"Carrier": 5, "Battleship": 4, "Cruiser": 3, "Submarine": 3, "Destroyer": 2}
 
-    def __init__(self, name, vertical=False):
+    def __init__(self, name, vertical):
         self.coordinates = []
         self.is_sunk = False
         self.vertical = vertical
@@ -14,7 +14,8 @@ class Ship(Square):
         self.lenght = self.ships[name]
 
 
-
+"""
 ocean = Ocean()
 #ocean.read_board_from_file()
 ocean.print_board()
+"""

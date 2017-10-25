@@ -14,4 +14,7 @@ class Square():
         self.sign = 'O'
 
     def change_to_hit(self):
-        self.sign = 'X'
+        if self.sing == "@":
+            self.sign = 'X'
+        else:
+            self.sign = 'O'
