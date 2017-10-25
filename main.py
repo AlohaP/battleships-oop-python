@@ -18,7 +18,7 @@ def main():
                             4. How to play
                             0. Quit
                             """)
-        menu = {"0": quit, "1": game.player_vs_cpu, "2": game.player_vs_player, "3": high_score, "4": instruction}
+        menu = {"0": quit, "1": game.create_player_ships, "2": game.player_vs_player, "3": high_score, "4": instruction}
         if menu_select not in menu:
             continue
         menu[menu_select]()

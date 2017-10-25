@@ -40,8 +40,6 @@ class Player:
             else:
                 index = chars.index(cord[0])
                 cord[0] = chars[index + 1]
-        self.validate_if_ship_is_near(ship)
-
         return ship
 
     def check_if_square_sign_dot(self, square):
@@ -85,8 +83,6 @@ player1.shoot_to_ship("C5")
 player1.print_boards()
 for coordinate in ship.coordinates:
     print(coordinate.name)
-<<<<<<< HEAD
-
 
 
 
