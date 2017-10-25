@@ -86,12 +86,13 @@ class PlayBattleships():
         self.change_ships_to_hidden(self.player2, self.player1)
 
     def turn_mechanics(self, player1, player2):
+
         self.clear()
         player1.print_boards()
         ready_check = input('{} it is your turn!' .format(player1.name))
         player_shoot = input('Where you want to shoot ? ')
-        player1.shoot_to_ship(player_shoot)
-        player2.get_hit(player_shoot)
+        player1.shoot_to_ship(player_shoot.upper())
+        player2.get_hit(player_shoot.upper())
 
         for ship in player2.warships:
             ship.check_if_sunk()
