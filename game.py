@@ -33,7 +33,7 @@ def create_player_ships():
                     print(ship_list)
                     break
                 elif ship_orient in ["V", "v"]:
-                    player.get_ship_coordinates(ship, ship_cord.upper(), True)
+                    player_ship = player.get_ship_coordinates(ship[0], ship_cord.upper(), True)
                     if not player.validate_if_ship_is_near(player_ship):
                         print('zła pozycja')
                         print(ship_list)
@@ -41,6 +41,7 @@ def create_player_ships():
                     else:
                         player_ship.change_squares_to_ship()
                         ship_list.remove(ship)
+                    player.print_boards()
                     print(ship_list)
                     break
                 else:
