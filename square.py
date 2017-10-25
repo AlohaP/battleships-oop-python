@@ -15,5 +15,13 @@ class Square():
         self.sign = '@'
 
     def change_to_hit(self):
+
+        if self.sign == "@":
+            self.sign = 'X'
+        else:
+            self.sign = 'O'
+            self.sign = 'X'
+
+    def change_to_sunk(self):
         self.sunk = True
 
