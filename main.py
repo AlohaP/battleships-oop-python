@@ -23,6 +23,5 @@ def main():
             continue
         menu[menu_select]()
 
-
 if __name__ == "__main__":
     main()

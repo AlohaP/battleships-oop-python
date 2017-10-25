@@ -2,63 +2,100 @@ from player import Player
 from ocean import Ocean
 from square import Square
 from ship import Ship
+import random
 
+class PlayBattleships():
 
-def clear():
-    print(chr(27) + "[2J")
+    def __init__(self, player1, player2):
+        self.player1 = player1
+        self.player2 = player2
 
+    def clear(self):
+        print(chr(27) + "[2J")
 
-def create_player_ships():
-    clear()
-    player = Player(input("What's your name?\n"))
-    ship_list = [("Destroyer", '2'), ("Submarine", '3'), ("Cruiser", '3'), ('Battleship', '4'), ('Carrier', '5')]
-    clear()
-    player.print_boards()
-    for ship in reversed(ship_list):
-        while True:
-            if ship_list:
-                clear()
-                ship_cord = input("Where do you want to place {})?".format(" (".join(ship)))
-                ship_orient = input("Do you want to place {}) horizontally or vertically ? Press h or v.".format(" (".join(ship)))
-                if ship_orient in ["H", "h"]:
-                    player_ship = player.get_ship_coordinates(ship[0], ship_cord.upper(), False)
-                    if not player.validate_if_ship_is_near(player_ship):
-                        print('zła pozycja')
+    def placement_validation(self, ship_list, player, player_ship, ship):
+        if not player.validate_if_ship_is_near(player_ship):
+            print('zła pozycja')
+            print(ship_list)
+
+        else:
+            player_ship.change_squares_to_ship()
+            player.warships.append(player_ship)
+            ship_list.remove(ship)
+
+    def create_player_ships(self, player):
+        self.clear()
+        ship_list = [("Destroyer", '2'), ("Submarine", '3'), ("Cruiser", '3'), ('Battleship', '4'), ('Carrier', '5')]
+        self.clear()
+        player.print_boards()
+
+        for ship in reversed(ship_list):
+
+            while True:
+
+                if ship_list:
+
+                    ship_cord = input("Where do you want to place {})? ".format(" (".join(ship)))
+                    self.clear()
+                    ship_orient = input("Do you want to place {}) horizontally or vertically ? Press h or v. ".format(" (".join(ship)))
+
+                    if ship_orient in ["H", "h"]:
+                        player_ship = player.get_ship_coordinates(ship[0], ship_cord.upper(), False)
+                        self.placement_validation(ship_list, player, player_ship, ship)
+                        player.print_boards()
                         print(ship_list)
-                        continue
-                    else:
-                        player_ship.change_squares_to_ship()
-                        ship_list.remove(ship)
-                    player.print_boards()
-                    print(ship_list)
-                    break
-                elif ship_orient in ["V", "v"]:
-                    player_ship = player.get_ship_coordinates(ship[0], ship_cord.upper(), True)
-                    if not player.validate_if_ship_is_near(player_ship):
-                        print('zła pozycja')
+                        break
+
+                    elif ship_orient in ["V", "v"]:
+                        player_ship = player.get_ship_coordinates(ship[0], ship_cord.upper(), True)
+                        self.placement_validation(ship_list, player, player_ship, ship)
+                        player.print_boards()
                         print(ship_list)
-                        continue
+                        break
+
                     else:
-                        player_ship.change_squares_to_ship()
-                        ship_list.remove(ship)
-                    player.print_boards()
-                    print(ship_list)
-                    break
-                else:
-                    continue
-            break
+                        continue
+                break
+
+    # def determine_first_turn(self):
+    #     turn = random.randint(1, 2)
+    #     if turn == 1:
+    #         player_1_turn = True
+    #         print('\n{} will go first.'.format(self.player1.name))
+    #         return player_1_turn
+    #     else:
+    #         player_1_turn = False
+    #         print('\n{} will go first.'.format(self.player2.name))
+    #         return player_1_turn
+
+    def boards_setup(self):
+        ready_check = input('{} press any key if youre ready '.format(self.player1.name))
+        self.create_player_ships(player1)
+        ready_check = input('{} press any key if youre ready '.format(self.player2.name))
+        self.create_player_ships(player2)
+
+    def turn_mechanics(self):
+        ready_check = input('{} it is your turn!' .format(self.player1.name))
+        player_shoot = input('Where you want to shoot ? ')
+        self.player1.shoot_to_ship(player_shoot)
+        self.player2.get_hit(player_shoot)
+        if not player2.warships:
+            self.player_victory(player1)
+        else:
+            for ship in player2.warships:
+                ship.check_if_sunk()
+                if ship.is_sunk is True:
+                    player2.warships.remove(ship)
+
+    def player_victory(self, player):
+        self.clear()
+        print('{} YOU WON!!! '.format(player.name))
 
 
-    input("")
 
-create_player_ships()
+player1 = Player('jeden')
+player2 = Player('dwa')
 
-
-
-
-        
-
-
-
-def player_vs_player():
-    print("elo")
+game = PlayBattleships(player1, player2)
+game.create_player_ships(player1)
+print(player1.warships)

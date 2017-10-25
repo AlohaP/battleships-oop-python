@@ -6,11 +6,11 @@ from ship import Ship
 class Player:
 
     def __init__(self, name):
+        self.warships = []
+        # self.warships = ['Destroyer', 'Submarine', 'Cruiser', 'Battleship', 'Carrier']
         self.name = name
-
         self.board = Ocean()
         self.board.read_board_from_file()
-
         self.view = Ocean()
         self.view.read_board_from_file()
 
@@ -25,7 +25,10 @@ class Player:
 
         square = self.view.find_object(coordinates)
         square.change_to_hit()
-        square.change_to_sunk()
+
+    def get_hit(self, coordinates):
+        square = self.board.find_object(coordinates)
+        square.change_to_hit()
 
     def get_ship_coordinates(self, name, coordinates, vertical):
         cord = list(coordinates)
