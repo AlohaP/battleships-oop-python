@@ -16,3 +16,17 @@ class Ship(Square):
     def change_squares_to_ship(self):
         for square in self.coordinates:
             square.change_to_ship()
+
+    def check_if_sunk(self):
+        counter = 0
+
+        for square in self.coordinates:
+            if square.sign == "X":
+                counter += 1
+
+        if counter == self.lenght:
+            for square in self.coordinates:
+                square.is_sunk = True
+
+            self.is_sunk = True
+
