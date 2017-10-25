@@ -27,7 +27,7 @@ class Player:
         square.change_to_hit()
         square.change_to_sunk()
 
-    def put_ship_on_board(self, name, coordinates, vertical):
+    def get_ship_coordinates(self, name, coordinates, vertical):
         cord = list(coordinates)
         cord[1] = int(cord[1])
         chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
@@ -68,7 +68,7 @@ class Player:
 
 
 player1 = Player('player1')
-ship = player1.put_ship_on_board("Carrier", "B2", True)
+ship = player1.get_ship_coordinates("Carrier", "B2", True)
 print(player1.validate_if_ship_is_near(ship))
 ship.change_squares_to_ship()
 print(player1.validate_if_ship_is_near(ship))
@@ -84,23 +84,7 @@ for coordinate in ship.coordinates:
 player1.print_boards()
 player1.shoot_to_ship("A2")
 player1.print_boards()
-player1.put_ship_on_board("A2")
+player1.get_ship_coordinates("A2")
 player1.print_boards()
 
-    def put_ship_on_board(self, coordinates):
-        ship = Ship("Carrier")
-        prow = self.board.find_object(coordinates)
-        for line in self.board.ocean_board:
-            if prow in line:
-                line_index = self.board.ocean_board.index(line)
-                index = line.index(prow)
-                if not ship.vertical:
-                    for i in range(index, index + ship.lenght):
-                        line[i] = ship
-                else:
-                    for i in range(line_index, line_index + ship.lenght):
-                        self.board.ocean_board[i][index] = ship
 """
-
-=======
->>>>>>> 4c9caddefdc5e46e4dcc6f13680730322b235f07

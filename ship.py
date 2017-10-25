@@ -16,9 +16,3 @@ class Ship(Square):
     def change_squares_to_ship(self):
         for square in self.coordinates:
             square.change_to_ship()
-
-"""
-ocean = Ocean()
-#ocean.read_board_from_file()
-ocean.print_board()
-"""
