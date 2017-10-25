@@ -44,6 +44,9 @@ class Player:
 
 
 
+"""
+
+
 player1 = Player('player1')
 ship = player1.put_ship_on_board("Carrier", "C2", True)
 
@@ -52,7 +55,7 @@ player1.print_boards()
 for coordinate in ship.coordinates:
     print(coordinate.name)
 
-"""
+
 
 
 player1.print_boards()
