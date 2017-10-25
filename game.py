@@ -70,11 +70,20 @@ class PlayBattleships():
     #         print('\n{} will go first.'.format(self.player2.name))
     #         return player_1_turn
 
+    def change_ships_to_hidden(self, player1, player2):
+        for ship in player1.warships:
+            list_of_cords = ship.coordinates
+            for square in list_of_cords:
+                square = player2.view.find_object(square.name)
+                square.hidden_ship = True
+
     def boards_setup(self):
         ready_check = input('{} press Enter if youre ready '.format(self.player1.name))
         self.create_player_ships(player1)
+        self.change_ships_to_hidden(self.player1, self.player2)
         ready_check = input('{} press Enter if youre ready '.format(self.player2.name))
         self.create_player_ships(player2)
+        self.change_ships_to_hidden(self.player2, self.player1)
 
     def turn_mechanics(self, player1, player2):
         self.clear()
