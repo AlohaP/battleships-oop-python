@@ -25,6 +25,7 @@ class Player:
 
         square = self.view.find_object(coordinates)
         square.change_to_hit()
+        square.change_to_sunk()
 
     def put_ship_on_board(self, name, coordinates, vertical):
         cord = list(coordinates)
