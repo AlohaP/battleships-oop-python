@@ -17,8 +17,15 @@ class Ship(Square):
         for square in self.coordinates:
             square.change_to_ship()
 
-"""
-ocean = Ocean()
-#ocean.read_board_from_file()
-ocean.print_board()
-"""
+    def check_if_sunk(self):
+        counter = 0
+
+        for square in self.coordinates:
+            if square.sign == "X":
+                counter += 1
+
+        if counter == self.lenght:
+            for square in self.coordinates:
+                square.is_sunk = True
+
+            self.is_sunk = True
