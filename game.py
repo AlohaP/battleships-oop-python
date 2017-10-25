@@ -3,6 +3,7 @@ from ocean import Ocean
 from square import Square
 from ship import Ship
 import random
+import time
 
 class PlayBattleships():
 
@@ -23,9 +24,10 @@ class PlayBattleships():
             player.warships.append(player_ship)
             ship_list.remove(ship)
 
+    # , ("Submarine", '3'), ("Cruiser", '3'), ('Battleship', '4'), ('Carrier', '5')
     def create_player_ships(self, player):
         self.clear()
-        ship_list = [("Destroyer", '2'), ("Submarine", '3'), ("Cruiser", '3'), ('Battleship', '4'), ('Carrier', '5')]
+        ship_list = [("Destroyer", '2')]
         self.clear()
         player.print_boards()
 
@@ -69,33 +71,40 @@ class PlayBattleships():
     #         return player_1_turn
 
     def boards_setup(self):
-        ready_check = input('{} press any key if youre ready '.format(self.player1.name))
+        ready_check = input('{} press Enter if youre ready '.format(self.player1.name))
         self.create_player_ships(player1)
-        ready_check = input('{} press any key if youre ready '.format(self.player2.name))
+        ready_check = input('{} press Enter if youre ready '.format(self.player2.name))
         self.create_player_ships(player2)
 
-    def turn_mechanics(self):
-        ready_check = input('{} it is your turn!' .format(self.player1.name))
+    def turn_mechanics(self, player1, player2):
+        self.clear()
+        player1.print_boards()
+        ready_check = input('{} it is your turn!' .format(player1.name))
         player_shoot = input('Where you want to shoot ? ')
-        self.player1.shoot_to_ship(player_shoot)
-        self.player2.get_hit(player_shoot)
+        player1.shoot_to_ship(player_shoot)
+        player2.get_hit(player_shoot)
+
+        for ship in player2.warships:
+            ship.check_if_sunk()
+            if ship.is_sunk is True:
+                player2.warships.remove(ship)
+        player1.print_boards()
+
         if not player2.warships:
             self.player_victory(player1)
-        else:
-            for ship in player2.warships:
-                ship.check_if_sunk()
-                if ship.is_sunk is True:
-                    player2.warships.remove(ship)
+
+        time.sleep(3)
 
     def player_victory(self, player):
         self.clear()
         print('{} YOU WON!!! '.format(player.name))
 
 
-
-player1 = Player('jeden')
-player2 = Player('dwa')
+player1 = Player('Player1')
+player2 = Player('PLayer2')
 
 game = PlayBattleships(player1, player2)
-game.create_player_ships(player1)
-print(player1.warships)
+game.boards_setup()
+while True:
+    game.turn_mechanics(player1, player2)
+    game.turn_mechanics(player2, player1)
