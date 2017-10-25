@@ -23,11 +23,4 @@ class Square():
 
     def change_to_sunk(self):
         self.sunk = True
-        if self.sign == "@":
-            self.sign = 'X'
-        else:
-            self.sign = 'O'
-
-    def change_to_sunk(self):
-        self.sunk = True
 

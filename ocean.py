@@ -32,13 +32,13 @@ class Ocean():
             for element in line:
 
                 if isinstance(element, Square) and element.sunk == True:
-                    print('{}{}{}'.format(self.R, element.sign, self.W),end = " ")
+                    print('{}{}{}'.format(self.R, element.sign, self.W), end = " ")
 
                 elif isinstance(element, Square):
-                    print(" ".join(element.sign),end=" ")
+                    print(" ".join(element.sign), end=" ")
                     
                 else:
-                    print(" ".join(element),end=" ")
+                    print(" ".join(element), end=" ")
 
     def find_object(self, coordinates):
         for line in self.ocean_board:
@@ -46,6 +46,3 @@ class Ocean():
                 if isinstance(element, Square) and element.name == coordinates:
                     return element
 
-
-# ocean = Ocean()
-# ocean.read_board_from_file()
