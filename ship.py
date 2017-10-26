@@ -3,8 +3,8 @@ from ocean import Ocean
 
 
 class Ship(Square):
-    # "Carrier": 5, "Battleship": 4, "Cruiser": 3, "Submarine": 3,
-    ships = {"Destroyer": 2}
+
+    ships = {"Destroyer": 2, "Carrier": 5, "Battleship": 4, "Cruiser": 3, "Submarine": 3}
 
     def __init__(self, name, vertical):
         self.coordinates = []

@@ -100,15 +100,29 @@ class PlayBattleships():
                 player2.warships.remove(ship)
         player1.print_boards()
 
-        if not player2.warships:
-            self.player_victory(player1)
-
         time.sleep(3)
 
     def player_victory(self, player):
+
         self.clear()
         print('{} YOU WON!!! '.format(player.name))
 
+    def check_if_warships_alive(self, player1, player2):
+
+        if not player2.warships:
+            self.player_victory(player1)
+            exit()
+            return True
+
+    def game_flow(self, player1, player2):
+
+        self.turn_mechanics(player1, player2)
+
+        self.check_if_warships_alive(player1, player2)
+
+        self.turn_mechanics(player2, player1)
+
+        self.check_if_warships_alive(player2, player1)
 
 # player1 = Player('Player1')
 # player2 = Player('PLayer2')

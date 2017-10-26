@@ -11,12 +11,11 @@ class PlayBattleshipsWithCPU(PlayBattleships):
     def __init__(self, player, cpu):
         self.player = player
         self.cpu = cpu
-        
+
     def get_random_cords(self):
         chars = ["B", "C", "D", "E", "F", "G", "H", "I"]
         cords = [random.choice(chars), str(random.randint(2, 9))]
         return "".join(cords)
-
 
     def create_CPU_ships(self, cpu):
         ship_list = ["Destroyer", "Submarine", "Cruiser", 'Battleship', 'Carrier']
@@ -37,16 +36,16 @@ class PlayBattleshipsWithCPU(PlayBattleships):
                 except AttributeError:
                     continue
                 
-cpu = Player("CPU")
-cpu1 = Player("CPU1")                
-play = PlayBattleshipsWithCPU(cpu, cpu1)
+# cpu = Player("CPU")
+# cpu1 = Player("CPU1")                
+# play = PlayBattleshipsWithCPU(cpu, cpu1)
 
-play.create_CPU_ships(cpu)
-play.create_CPU_ships(cpu1)
-cpu.print_boards()
-cords = play.get_random_cords()
-player1 = Player('Player1')
-player2 = Player('PLayer2')
+# play.create_CPU_ships(cpu)
+# play.create_CPU_ships(cpu1)
+# cpu.print_boards()
+# cords = play.get_random_cords()
+# player1 = Player('Player1')
+# player2 = Player('PLayer2')
 
-cpu.shoot_to_ship(cords)
-cpu.print_boards()
+# cpu.shoot_to_ship(cords)
+# cpu.print_boards()

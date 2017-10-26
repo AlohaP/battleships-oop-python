@@ -34,9 +34,15 @@ def main():
             game.boards_setup(player1, player2)
 
             while True:
-                game.turn_mechanics(player1, player2)
-                game.turn_mechanics(player2, player1)
-            
+
+                game.game_flow(player1, player2)
+
+                if game.game_flow == True:
+                    print("You won")
+                    break
+
+
+
 
 
 def high_score():
