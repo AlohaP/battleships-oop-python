@@ -28,7 +28,7 @@ def highscore_creation(game, player, start_time):
     highscore = abs(17 * len(player.warships) + 100 - elapsed_time) * 1000
     player.highscore.append(highscore)
     high_score_export(player)
-    print(player.highscore)  # testowy print
+
 
 
 def main():
