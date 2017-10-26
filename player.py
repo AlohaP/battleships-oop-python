@@ -40,7 +40,7 @@ class Player:
     def get_ship_coordinates(self, name, coordinates, vertical):
         cord = list(coordinates)
         cord[1] = int(cord[1])
-        chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+        chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', "#"]
         ship = Ship(name, vertical)
         for i in range(0, ship.lenght):
             square = self.board.find_object("".join([cord[0], str(cord[1])]))
