@@ -7,6 +7,7 @@ from ship import Ship
 from ocean import Ocean
 import time
 import pickle
+import howtoplay
 
 menu_commands = ["Player vs Player", "Player vs CPU", "How to play",
                 "Hall of Fame", "Exit"]
@@ -92,7 +93,8 @@ def main():
                 else:
                     print("Wrong input")
                     continue
-
+        if option == '2':
+            howtoplay.instruction_display()
         if option == '3':
             high_score_presentation()
 
