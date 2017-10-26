@@ -6,6 +6,7 @@ from ship import Ship
 import random
 import time
 
+
 class PlayBattleships():
 
     def __init__(self, player1, player2):
@@ -29,8 +30,7 @@ class PlayBattleships():
         available_cord_numbers = ['2', '3', '4', '5', '6', '7', '8', '9']
 
         os.system('clear')
-        # , ("Submarine", '3'), ("Cruiser", '3'), ('Battleship', '4'), ('Carrier', '5')
-        ship_list = [("Destroyer", '2'),("Submarine", '3')]
+        ship_list = [("Destroyer", '2'), ("Submarine", '3'), ("Cruiser", '3'), ('Battleship', '4'), ('Carrier', '5')]
         os.system('clear')
 
         for ship in reversed(ship_list):
@@ -81,17 +81,6 @@ class PlayBattleships():
                         continue
                 break
 
-    # def determine_first_turn(self):
-    #     turn = random.randint(1, 2)
-    #     if turn == 1:
-    #         player_1_turn = True
-    #         print('\n{} will go first.'.format(self.player1.name))
-    #         return player_1_turn
-    #     else:
-    #         player_1_turn = False
-    #         print('\n{} will go first.'.format(self.player2.name))
-    #         return player_1_turn
-
     def change_ships_to_hidden(self, player1, player2):
         for ship in player1.warships:
             list_of_cords = ship.coordinates
@@ -99,7 +88,7 @@ class PlayBattleships():
                 square = player2.view.find_object(square.name)
                 square.hidden_ship = True
 
-    def boards_setup(self, player1, player2):
+    def boards_setup(self):
         ready_check = input('{} press Enter if youre ready '.format(self.player1.name))
         self.create_player_ships(self.player1)
         self.change_ships_to_hidden(self.player1, self.player2)
@@ -123,15 +112,13 @@ class PlayBattleships():
                 player2.warships.remove(ship)
         player1.print_boards()
 
-
     def player_victory(self, player):
         os.system('clear')
         player.highscore.append(player.name)
         player.highscore.append(len(player.warships))
         print('{} YOU WON!!! '.format(player.name))
 
-
-    def check_if_warships_alive(self, player1, player2):
+    def check_if_warships_alive(self, player2):
 
         if not player2.warships:
             return True
@@ -141,12 +128,3 @@ class PlayBattleships():
         self.turn_mechanics(player1, player2)
 
         self.turn_mechanics(player2, player1)
-
-# player1 = Player('Player1')
-# player2 = Player('PLayer2')
-
-# game = PlayBattleships(player1, player2)
-# game.boards_setup()
-# while True:
-# game.turn_mechanics(player1, player2)
-# game.turn_mechanics(player2, player1)

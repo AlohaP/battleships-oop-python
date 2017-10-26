@@ -24,13 +24,18 @@ class Player:
         self.board.print_board()           # board = your board
 
     def shoot_to_ship(self, coordinates):
-
-        square = self.view.find_object(coordinates)
-        square.change_to_hit()
+        try:
+            square = self.view.find_object(coordinates)
+            square.change_to_hit()
+        except AttributeError:
+            pass
 
     def get_hit(self, coordinates):
-        square = self.board.find_object(coordinates)
-        square.change_to_hit()
+        try:
+            square = self.board.find_object(coordinates)
+            square.change_to_hit()
+        except AttributeError:
+            pass
 
     def get_ship_coordinates(self, name, coordinates, vertical):
         cord = list(coordinates)

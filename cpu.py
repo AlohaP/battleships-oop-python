@@ -134,7 +134,7 @@ class PlayBattleshipsWithCPU(PlayBattleships):
             player_shoot = self.computer_shoot()
         else:
             ready_check = input('{} it is your turn!' .format(player1.name))
-            player_shoot = input('Where you want to shoot ? ')
+            player_shoot = input('Where you want to shoot ? ').upper()
         player1.shoot_to_ship(player_shoot)
         player2.get_hit(player_shoot)
 

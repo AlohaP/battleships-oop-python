@@ -10,7 +10,7 @@ import pickle
 import howtoplay
 
 menu_commands = ["Player vs Player", "Player vs CPU", "How to play",
-                "Hall of Fame", "Exit"]
+                 "Hall of Fame", "Exit"]
 
 difficulty = ["Easy", "Medium", "Hard"]
 
@@ -46,29 +46,28 @@ def main():
             player2 = Player(input("Please enter player 2 name: "))
 
             game = PlayBattleships(player1, player2)
-            game.boards_setup(player1, player2)
+            game.boards_setup()
             start_time = time.time()
 
             while True:
                 game.turn_mechanics(player1, player2)
-                game_result = game.check_if_warships_alive(player1, player2)
+                game_result = game.check_if_warships_alive(player2)
                 if game_result is True:
                     highscore_creation(game, player1, start_time)
                     break
 
                 game.turn_mechanics(player2, player1)
-                game_result = game.check_if_warships_alive(player2, player1)
+                game_result = game.check_if_warships_alive(player1)
                 if game_result is True:
                     highscore_creation(game, player2, start_time)
                     break
-        
-        elif option == "1":
 
-            player1 = Player(input("Please enter your name: "))
-            cpu1 = Player("CPU1")
+        if option == "1":
+
             difficulty_levels = ["easy", "medium", "hard"]
             while True:
-
+                player1 = Player(input("Please enter your name: "))
+                cpu1 = Player("CPU1")
                 print_program_menu(difficulty)
 
                 difficulty_option = input("Select an difficulty")
@@ -79,13 +78,13 @@ def main():
                     start_time = time.time()
                     while True:
                         game.turn_mechanics(player1, cpu1)
-                        game_result = game.check_if_warships_alive(player1, cpu1)
+                        game_result = game.check_if_warships_alive(cpu1)
                         if game_result is True:
                             highscore_creation(game, player1, start_time)
                             break
 
                         game.turn_mechanics(cpu1, player1)
-                        game_result = game.check_if_warships_alive(cpu1, player1)
+                        game_result = game.check_if_warships_alive(player1)
                         if game_result is True:
                             highscore_creation(game, cpu1, start_time)
                             break
@@ -93,18 +92,18 @@ def main():
                 else:
                     print("Wrong input")
                     continue
+
         if option == '2':
-            howtoplay.instruction_display()
+            howtoplay.instructions_display()
+
         if option == '3':
             high_score_presentation()
 
 
+def high_score_export(player, filename='highscores.txt', mode='ab'):
+    with open(filename, mode) as exporting_file:
+        pickle.dump(player.highscore, exporting_file)
 
-
-
-def high_score_export(player, filename='highscores.txt', mode = 'ab'):
-        with open(filename, mode) as exporting_file:
-            pickle.dump(player.highscore, exporting_file)
 
 def high_score_presentation(filename='highscores.txt', mode='rb'):
     imported_hs = []
@@ -119,9 +118,6 @@ def high_score_presentation(filename='highscores.txt', mode='rb'):
     for result in imported_hs:
         print('| Total highscore: {} | Ships left: {} | Username: {}  | Time: {} seconds '.format(result[3], result[2], result[1], result[0]))
 
-def instruction():
-
-    print("elo")
 
 if __name__ == "__main__":
     main()
