@@ -1,4 +1,4 @@
-import game
+
 from square import Square
 from player import Player
 from game import PlayBattleships
@@ -8,7 +8,9 @@ from ocean import Ocean
 
 
 menu_commands = ["Player vs Player", "Player vs CPU", "How to play",
-                "Hall of Fame", "Exit"] 
+                "Hall of Fame", "Exit"]
+
+difficulty = ["Easy", "Medium", "Hard"]
 
 
 def print_program_menu(menu_commands):
@@ -34,7 +36,7 @@ def main():
             game.boards_setup(player1, player2)
 
             while True:
-                
+
                 game.turn_mechanics(player1, player2)
 
                 game_result = game.check_if_warships_alive(player1, player2)
@@ -49,7 +51,37 @@ def main():
 
                 if game_result is True:
                     print('{} YOU WON!!! '.format(player2.name))
-                    break                   
+                    break
+        
+        elif option == "1":
+
+            player1 = Player(input("Please enter your name: "))
+
+            while True:
+
+                print_program_menu(difficulty)
+
+                difficulty_option = input("Select an difficulty")
+
+                if difficulty_option == "0":
+
+                    pass                                #There will be easy game here
+
+                elif difficulty_option == "1":
+
+                    pass                                #There will be medium here
+
+                elif difficulty_option == "2":
+
+                    pass                                #Hard
+
+                else:
+                    print("Wrong input")
+                    continue
+
+
+
+
 
 
 def high_score():
