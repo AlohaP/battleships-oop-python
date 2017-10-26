@@ -65,33 +65,29 @@ def main():
 
             player1 = Player(input("Please enter your name: "))
             cpu1 = Player("CPU1")
-            
+            difficulty_levels = ["easy", "medium", "hard"]
             while True:
 
                 print_program_menu(difficulty)
 
                 difficulty_option = input("Select an difficulty")
 
-                if difficulty_option == "0":
-                    game = PlayBattleshipsWithCPU(player1, cpu1, "easy")
+                if difficulty_option in ["0", "1", "2"]:
+                    game = PlayBattleshipsWithCPU(player1, cpu1, difficulty_levels[int(difficulty_option)])
                     game.boards_setup()
+                    start_time = time.time()
                     while True:
                         game.turn_mechanics(player1, cpu1)
-                        game.turn_mechanics(cpu1, player1)
+                        game_result = game.check_if_warships_alive(player1, cpu1)
+                        if game_result is True:
+                            highscore_creation(game, player1, start_time)
+                            break
 
-                elif difficulty_option == "1":
-                    game = PlayBattleshipsWithCPU(player1, cpu1, "medium")
-                    game.boards_setup()
-                    while True:
-                        game.turn_mechanics(player1, cpu1)
                         game.turn_mechanics(cpu1, player1)
-
-                elif difficulty_option == "2":
-                    game = PlayBattleshipsWithCPU(player1, cpu1, "hard")
-                    game.boards_setup()
-                    while True:
-                        game.turn_mechanics(player1, cpu1)
-                        game.turn_mechanics(cpu1, player1)
+                        game_result = game.check_if_warships_alive(cpu1, player1)
+                        if game_result is True:
+                            highscore_creation(game, cpu1, start_time)
+                            break
 
                 else:
                     print("Wrong input")
