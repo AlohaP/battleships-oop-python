@@ -48,13 +48,17 @@ class Player:
         return ship
 
     def check_if_square_sign_dot(self, square):
+
+        if not isinstance(square, Square):
+            return False
+
         if square.sign == ".":
             return True
         else:
             return False
 
     def validate_if_ship_is_near(self, ship):
-        chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+        chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', "#"]
         check_if_place = []
         for coordinate in ship.coordinates:
             cord = list(coordinate.name)
