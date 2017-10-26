@@ -30,13 +30,14 @@ class PlayBattleships():
 
         os.system('clear')
         # , ("Submarine", '3'), ("Cruiser", '3'), ('Battleship', '4'), ('Carrier', '5')
-        ship_list = [("Destroyer", '2')]
+        ship_list = [("Destroyer", '2'),("Submarine", '3')]
         os.system('clear')
-        player.print_boards()
 
         for ship in reversed(ship_list):
 
             while True:
+
+                player.print_boards()
 
                 if ship_list:
 
@@ -64,7 +65,6 @@ class PlayBattleships():
                         player_ship = player.get_ship_coordinates(ship[0], ship_cord.upper(), False)
 
                         if self.placement_validation(ship_list, player, player_ship, ship) is False:
-                            player.print_boards()
                             print('>>>>> Wrong input <<<<<')
                             continue
                         break
@@ -73,7 +73,6 @@ class PlayBattleships():
                         player_ship = player.get_ship_coordinates(ship[0], ship_cord.upper(), True)
 
                         if self.placement_validation(ship_list, player, player_ship, ship) is False:
-                            player.print_boards()
                             print('>>>>> Wrong input <<<<<')
                             continue
                         break
