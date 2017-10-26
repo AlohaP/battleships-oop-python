@@ -33,6 +33,45 @@ class PlayBattleshipsWithCPU(PlayBattleships):
         else:
             return "".join([random.choice(chars), str(random.randint(2, 9))])
 
+    def aim_in_cross(self):
+        possible_shoots = [
+            [self.hitted_and_not_sunk_cords[0][0], str(int(self.hitted_and_not_sunk_cords[0][1]) + 1)],
+            [self.hitted_and_not_sunk_cords[0][0], str(int(self.hitted_and_not_sunk_cords[0][1]) - 1)],
+            [self.chars[self.chars.index(self.hitted_and_not_sunk_cords[0][0]) + 1], self.hitted_and_not_sunk_cords[0][1]],
+            [self.chars[self.chars.index(self.hitted_and_not_sunk_cords[0][0]) - 1], self.hitted_and_not_sunk_cords[0][1]]
+                                ]
+        while True:
+            shoot = random.choice(possible_shoots)
+            shoot = "".join(shoot)
+            if shoot not in self.shooted_cords:
+                break
+        if self.player1.board.find_object(shoot).sign == "@":
+            self.hitted_and_not_sunk_cords.append(shoot)
+            self.hitted_and_not_sunk_cords = sorted(self.hitted_and_not_sunk_cords)
+        self.shooted_cords.append(shoot)
+        return shoot
+
+        def aim_in_line(self):
+            while True:
+                if self.hitted_and_not_sunk_cords[0][0] == self.hitted_and_not_sunk_cords[-1][0]:
+                    shoot = [self.hitted_and_not_sunk_cords[0][0], str(int(self.hitted_and_not_sunk_cords[0][1]) - 1)]
+                    shoot = "".join(shoot)
+                    if shoot in self.shooted_cords:
+                        shoot = [self.hitted_and_not_sunk_cords[0][0], str(int(self.hitted_and_not_sunk_cords[-1][1]) + 1)]
+                elif self.hitted_and_not_sunk_cords[0][1] == self.hitted_and_not_sunk_cords[-1][1]:
+                    shoot = [self.chars[self.chars.index(self.hitted_and_not_sunk_cords[0][0]) - 1], self.hitted_and_not_sunk_cords[0][1]]
+                    shoot = "".join(shoot)
+                    if shoot in self.shooted_cords:
+                        shoot = [self.chars[self.chars.index(self.hitted_and_not_sunk_cords[-1][0]) + 1], self.hitted_and_not_sunk_cords[0][1]]
+                shoot = "".join(shoot)
+                if shoot not in self.shooted_cords:
+                    break
+            if self.player1.board.find_object(shoot).sign == "@":
+                self.hitted_and_not_sunk_cords.append(shoot)
+                self.hitted_and_not_sunk_cords = sorted(self.hitted_and_not_sunk_cords)
+            self.shooted_cords.append(shoot)
+            return shoot
+
     def computer_shoot(self):
         if self.hitted_and_not_sunk_cords:
             if self.player1.board.find_object(self.hitted_and_not_sunk_cords[0]).sunk:
@@ -55,42 +94,10 @@ class PlayBattleshipsWithCPU(PlayBattleships):
                             self.hitted_and_not_sunk_cords = sorted(self.hitted_and_not_sunk_cords)
                             return shoot
             elif len(self.hitted_and_not_sunk_cords) == 1:
-                possible_shoots = [
-                    [self.hitted_and_not_sunk_cords[0][0], str(int(self.hitted_and_not_sunk_cords[0][1]) + 1)],
-                    [self.hitted_and_not_sunk_cords[0][0], str(int(self.hitted_and_not_sunk_cords[0][1]) - 1)],
-                    [self.chars[self.chars.index(self.hitted_and_not_sunk_cords[0][0]) + 1], self.hitted_and_not_sunk_cords[0][1]],
-                    [self.chars[self.chars.index(self.hitted_and_not_sunk_cords[0][0]) - 1], self.hitted_and_not_sunk_cords[0][1]]
-                                     ]
-                while True:
-                    shoot = random.choice(possible_shoots)
-                    shoot = "".join(shoot)
-                    if shoot not in self.shooted_cords:
-                        break
-                if self.player1.board.find_object(shoot).sign == "@":
-                    self.hitted_and_not_sunk_cords.append(shoot)
-                    self.hitted_and_not_sunk_cords = sorted(self.hitted_and_not_sunk_cords)
-                self.shooted_cords.append(shoot)
-                return shoot
+                return self.aim_in_cross()
+
             elif len(self.hitted_and_not_sunk_cords) > 1:
-                while True:
-                    if self.hitted_and_not_sunk_cords[0][0] == self.hitted_and_not_sunk_cords[-1][0]:
-                        shoot = [self.hitted_and_not_sunk_cords[0][0], str(int(self.hitted_and_not_sunk_cords[0][1]) - 1)]
-                        shoot = "".join(shoot)
-                        if shoot in self.shooted_cords:
-                            shoot = [self.hitted_and_not_sunk_cords[0][0], str(int(self.hitted_and_not_sunk_cords[-1][1]) + 1)]
-                    elif self.hitted_and_not_sunk_cords[0][1] == self.hitted_and_not_sunk_cords[-1][1]:
-                        shoot = [self.chars[self.chars.index(self.hitted_and_not_sunk_cords[0][0]) - 1], self.hitted_and_not_sunk_cords[0][1]]
-                        shoot = "".join(shoot)
-                        if shoot in self.shooted_cords:
-                            shoot = [self.chars[self.chars.index(self.hitted_and_not_sunk_cords[-1][0]) + 1], self.hitted_and_not_sunk_cords[0][1]]
-                    shoot = "".join(shoot)
-                    if shoot not in self.shooted_cords:
-                        break
-                if self.player1.board.find_object(shoot).sign == "@":
-                    self.hitted_and_not_sunk_cords.append(shoot)
-                    self.hitted_and_not_sunk_cords = sorted(self.hitted_and_not_sunk_cords)
-                self.shooted_cords.append(shoot)
-                return shoot
+                return self.aim_in_line()
 
     def create_CPU_ships(self, cpu):
         ship_list = ["Destroyer", "Submarine", "Cruiser", 'Battleship', 'Carrier']
@@ -145,12 +152,3 @@ class PlayBattleshipsWithCPU(PlayBattleships):
     def player_victory(self, player):
         os.system("clear")
         print('{} YOU WON!!! '.format(player.name))
-'''         
-ja = Player("Prze")
-cpu1 = Player("CPU1")                
-play = PlayBattleshipsWithCPU(ja, cpu1, "hard")
-play.boards_setup()
-while True:
-    play.turn_mechanics(ja, cpu1)
-    play.turn_mechanics(cpu1, ja)
-'''
