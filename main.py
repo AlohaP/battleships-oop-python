@@ -6,6 +6,7 @@ from cpu import PlayBattleshipsWithCPU
 from ship import Ship
 from ocean import Ocean
 import time
+import pickle
 
 menu_commands = ["Player vs Player", "Player vs CPU", "How to play",
                 "Hall of Fame", "Exit"]
@@ -41,8 +42,12 @@ def main():
                 game_result = game.check_if_warships_alive(player1, player2)
                 if game_result is True:
                     end_time = time.time()
-                    player1.highscore.append(int(end_time - start_time))
+                    elapsed_time = round(end_time - start_time)
+                    player1.highscore.append(elapsed_time)
                     game.player_victory(player1)
+                    highscore = abs(17 * len(player1.warships) + 100 - elapsed_time) * 1000
+                    player1.highscore.append(highscore)
+                    high_score_export(player1)
                     print(player1.highscore) #testowy print
                     break
 
@@ -50,9 +55,12 @@ def main():
                 game_result = game.check_if_warships_alive(player2, player1)
                 if game_result is True:
                     end_time = time.time()
-                    player2.highscore.append(int(end_time - start_time))
-                    player2.stop_time()
+                    elapsed_time = round(end_time - start_time)
+                    player2.highscore.append(elapsed_time)
                     game.player_victory(player2)
+                    highscore = abs(17 * len(player2.warships) + 100 - elapsed_time) * 1000
+                    player2.highscore.append(highscore)
+                    high_score_export(player2)
                     print(player2.highscore) #testowy print
                     break
         
@@ -82,14 +90,29 @@ def main():
                     print("Wrong input")
                     continue
 
+        if option == '3':
+            high_score_presentation()
 
 
 
 
 
-def high_score():
+def high_score_export(player, filename='highscores.txt', mode = 'ab'):
+        with open(filename, mode) as exporting_file:
+            pickle.dump(player.highscore, exporting_file)
 
-    print("elo")
+def high_score_presentation(filename='highscores.txt', mode='rb'):
+    imported_hs = []
+    with open(filename, mode) as openfile:
+        while True:
+            try:
+                imported_hs.append(pickle.load(openfile))
+            except EOFError:
+                break
+    imported_hs = sorted(imported_hs, reverse=False)[:10]
+    print('The best Captains currently on our waters are: \n')
+    for result in imported_hs:
+        print('| Total highscore: {} | Ships left: {} | Username: {}  | Time: {} seconds '.format(result[3], result[2], result[1], result[0]))
 
 def instruction():
 
