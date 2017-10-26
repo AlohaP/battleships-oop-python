@@ -1,3 +1,4 @@
+import os
 from player import Player
 from ocean import Ocean
 from square import Square
@@ -11,9 +12,6 @@ class PlayBattleships():
         self.player1 = player1
         self.player2 = player2
 
-    def clear(self):
-        print(chr(27) + "[2J")
-
     def placement_validation(self, ship_list, player, player_ship, ship):
         if not player.validate_if_ship_is_near(player_ship):
             print('zła pozycja')
@@ -26,9 +24,9 @@ class PlayBattleships():
 
     # , ("Submarine", '3'), ("Cruiser", '3'), ('Battleship', '4'), ('Carrier', '5')
     def create_player_ships(self, player):
-        self.clear()
+        os.system('clear')
         ship_list = [("Destroyer", '2')]
-        self.clear()
+        os.system('clear')
         player.print_boards()
 
         for ship in reversed(ship_list):
@@ -38,7 +36,6 @@ class PlayBattleships():
                 if ship_list:
 
                     ship_cord = input("Where do you want to place {})? ".format(" (".join(ship)))
-                    self.clear()
                     ship_orient = input("Do you want to place {}) horizontally or vertically ? Press h or v. ".format(" (".join(ship)))
 
                     if ship_orient in ["H", "h"]:
@@ -87,9 +84,10 @@ class PlayBattleships():
 
     def turn_mechanics(self, player1, player2):
 
-        self.clear()
+        os.system('clear')
         player1.print_boards()
-        ready_check = input('{} it is your turn!' .format(player1.name))
+        print('{} it is your turn!' .format(player1.name))
+        time.sleep(1)
         player_shoot = input('Where you want to shoot ? ')
         player1.shoot_to_ship(player_shoot.upper())
         player2.get_hit(player_shoot.upper())
@@ -100,18 +98,17 @@ class PlayBattleships():
                 player2.warships.remove(ship)
         player1.print_boards()
 
-        time.sleep(3)
 
     def player_victory(self, player):
 
-        self.clear()
+        os.system('clear')
         print('{} YOU WON!!! '.format(player.name))
+        time.sleep(1)
 
     def check_if_warships_alive(self, player1, player2):
 
         if not player2.warships:
             self.player_victory(player1)
-            exit()
             return True
 
     def game_flow(self, player1, player2):
