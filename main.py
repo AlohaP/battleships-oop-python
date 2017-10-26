@@ -20,6 +20,17 @@ def print_program_menu(menu_commands):
         print(str(menu_commands.index(option)) + "----->" + option)
 
 
+def highscore_creation(game, player, start_time):
+    end_time = time.time()
+    elapsed_time = round(end_time - start_time)
+    player.highscore.append(elapsed_time)
+    game.player_victory(player)
+    highscore = abs(17 * len(player.warships) + 100 - elapsed_time) * 1000
+    player.highscore.append(highscore)
+    high_score_export(player)
+    print(player.highscore)  # testowy print
+
+
 def main():
 
     while True:
@@ -41,27 +52,13 @@ def main():
                 game.turn_mechanics(player1, player2)
                 game_result = game.check_if_warships_alive(player1, player2)
                 if game_result is True:
-                    end_time = time.time()
-                    elapsed_time = round(end_time - start_time)
-                    player1.highscore.append(elapsed_time)
-                    game.player_victory(player1)
-                    highscore = abs(17 * len(player1.warships) + 100 - elapsed_time) * 1000
-                    player1.highscore.append(highscore)
-                    high_score_export(player1)
-                    print(player1.highscore) #testowy print
+                    highscore_creation(game, player1, start_time)
                     break
 
                 game.turn_mechanics(player2, player1)
                 game_result = game.check_if_warships_alive(player2, player1)
                 if game_result is True:
-                    end_time = time.time()
-                    elapsed_time = round(end_time - start_time)
-                    player2.highscore.append(elapsed_time)
-                    game.player_victory(player2)
-                    highscore = abs(17 * len(player2.warships) + 100 - elapsed_time) * 1000
-                    player2.highscore.append(highscore)
-                    high_score_export(player2)
-                    print(player2.highscore) #testowy print
+                    highscore_creation(game, player2, start_time)
                     break
         
         elif option == "1":

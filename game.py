@@ -23,15 +23,14 @@ class PlayBattleships():
             player.warships.append(player_ship)
             ship_list.remove(ship)
 
-    # 
     def create_player_ships(self, player):
 
         available_cord_letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', "#"]
         available_cord_numbers = ['2', '3', '4', '5', '6', '7', '8', '9']
 
         os.system('clear')
-
-        ship_list = [("Destroyer", '2'), ("Submarine", '3'), ("Cruiser", '3'), ('Battleship', '4'), ('Carrier', '5')]
+        # , ("Submarine", '3'), ("Cruiser", '3'), ('Battleship', '4'), ('Carrier', '5')
+        ship_list = [("Destroyer", '2')]
         os.system('clear')
         player.print_boards()
 
@@ -63,6 +62,7 @@ class PlayBattleships():
 
                     if ship_orient in ["H", "h"]:
                         player_ship = player.get_ship_coordinates(ship[0], ship_cord.upper(), False)
+
                         if self.placement_validation(ship_list, player, player_ship, ship) is False:
                             player.print_boards()
                             print('>>>>> Wrong input <<<<<')
@@ -71,11 +71,11 @@ class PlayBattleships():
 
                     elif ship_orient in ["V", "v"]:
                         player_ship = player.get_ship_coordinates(ship[0], ship_cord.upper(), True)
+
                         if self.placement_validation(ship_list, player, player_ship, ship) is False:
                             player.print_boards()
                             print('>>>>> Wrong input <<<<<')
                             continue
-
                         break
 
                     else:
