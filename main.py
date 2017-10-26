@@ -5,7 +5,7 @@ from game import PlayBattleships
 from cpu import PlayBattleshipsWithCPU
 from ship import Ship
 from ocean import Ocean
-
+import time
 
 menu_commands = ["Player vs Player", "Player vs CPU", "How to play",
                 "Hall of Fame", "Exit"]
@@ -34,19 +34,26 @@ def main():
 
             game = PlayBattleships(player1, player2)
             game.boards_setup(player1, player2)
+            start_time = time.time()
 
             while True:
-
                 game.turn_mechanics(player1, player2)
                 game_result = game.check_if_warships_alive(player1, player2)
                 if game_result is True:
+                    end_time = time.time()
+                    player1.highscore.append(int(end_time - start_time))
                     game.player_victory(player1)
+                    print(player1.highscore) #testowy print
                     break
 
                 game.turn_mechanics(player2, player1)
                 game_result = game.check_if_warships_alive(player2, player1)
                 if game_result is True:
+                    end_time = time.time()
+                    player2.highscore.append(int(end_time - start_time))
+                    player2.stop_time()
                     game.player_victory(player2)
+                    print(player2.highscore) #testowy print
                     break
         
         elif option == "1":

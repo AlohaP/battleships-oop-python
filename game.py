@@ -100,15 +100,15 @@ class PlayBattleships():
 
 
     def player_victory(self, player):
-
         os.system('clear')
+        player.highscore.append(player.name)
+        player.highscore.append(len(player.warships))
         print('{} YOU WON!!! '.format(player.name))
-        time.sleep(1)
+
 
     def check_if_warships_alive(self, player1, player2):
 
         if not player2.warships:
-            self.player_victory(player1)
             return True
 
     def game_flow(self, player1, player2):

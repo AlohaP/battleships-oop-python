@@ -1,12 +1,14 @@
 from ocean import Ocean
 from square import Square
 from ship import Ship
+import time
 
 
 class Player:
 
     def __init__(self, name):
         self.warships = []
+        self.highscore = []
         # self.warships = ['Destroyer', 'Submarine', 'Cruiser', 'Battleship', 'Carrier']
         self.name = name
         self.board = Ocean()
@@ -72,28 +74,3 @@ class Player:
             if not element:
                 return False
         return True
-
-
-"""
-
-
-player1 = Player('player1')
-ship = player1.get_ship_coordinates("Carrier", "B2", True)
-print(player1.validate_if_ship_is_near(ship))
-ship.change_squares_to_ship()
-print(player1.validate_if_ship_is_near(ship))
-player1.shoot_to_ship("C5")
-player1.print_boards()
-for coordinate in ship.coordinates:
-    print(coordinate.name)
-
-
-
-player1.print_boards()
-player1.shoot_to_ship("A2")
-player1.print_boards()
-player1.get_ship_coordinates("A2")
-player1.print_boards()
-
-"""
-
