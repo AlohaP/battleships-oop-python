@@ -67,7 +67,8 @@ def main():
         elif option == "1":
 
             player1 = Player(input("Please enter your name: "))
-
+            cpu1 = Player("CPU1")
+            
             while True:
 
                 print_program_menu(difficulty)
@@ -75,16 +76,25 @@ def main():
                 difficulty_option = input("Select an difficulty")
 
                 if difficulty_option == "0":
-
-                    pass                                #There will be easy game here
+                    game = PlayBattleshipsWithCPU(player1, cpu1, "easy")
+                    game.boards_setup()
+                    while True:
+                        game.turn_mechanics(player1, cpu1)
+                        game.turn_mechanics(cpu1, player1)
 
                 elif difficulty_option == "1":
-
-                    pass                                #There will be medium here
+                    game = PlayBattleshipsWithCPU(player1, cpu1, "medium")
+                    game.boards_setup()
+                    while True:
+                        game.turn_mechanics(player1, cpu1)
+                        game.turn_mechanics(cpu1, player1)
 
                 elif difficulty_option == "2":
-
-                    pass                                #Hard
+                    game = PlayBattleshipsWithCPU(player1, cpu1, "hard")
+                    game.boards_setup()
+                    while True:
+                        game.turn_mechanics(player1, cpu1)
+                        game.turn_mechanics(cpu1, player1)
 
                 else:
                     print("Wrong input")

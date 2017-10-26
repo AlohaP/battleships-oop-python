@@ -26,7 +26,7 @@ class Ship(Square):
 
         if counter == self.lenght:
             for square in self.coordinates:
-                square.is_sunk = True
+                square.sunk = True
 
             self.is_sunk = True
 

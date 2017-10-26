@@ -23,7 +23,7 @@ class PlayBattleships():
             player.warships.append(player_ship)
             ship_list.remove(ship)
 
-    # , ("Submarine", '3'), ("Cruiser", '3'), ('Battleship', '4'), ('Carrier', '5')
+    # 
     def create_player_ships(self, player):
 
         available_cord_letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', "#"]
@@ -31,7 +31,7 @@ class PlayBattleships():
 
         os.system('clear')
 
-        ship_list = [("Destroyer", '2')]
+        ship_list = [("Destroyer", '2'), ("Submarine", '3'), ("Cruiser", '3'), ('Battleship', '4'), ('Carrier', '5')]
         os.system('clear')
         player.print_boards()
 
