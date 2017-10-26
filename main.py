@@ -38,19 +38,15 @@ def main():
             while True:
 
                 game.turn_mechanics(player1, player2)
-
                 game_result = game.check_if_warships_alive(player1, player2)
-
                 if game_result is True:
-                    print('{} YOU WON!!! '.format(player1.name))
+                    game.player_victory(player1)
                     break
 
                 game.turn_mechanics(player2, player1)
-
                 game_result = game.check_if_warships_alive(player2, player1)
-
                 if game_result is True:
-                    print('{} YOU WON!!! '.format(player2.name))
+                    game.player_victory(player2)
                     break
         
         elif option == "1":
