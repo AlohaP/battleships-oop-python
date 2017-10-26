@@ -106,12 +106,5 @@ class PlayBattleships():
         print('{} YOU WON!!! '.format(player.name))
 
     def check_if_warships_alive(self, player2):
-
         if not player2.warships:
             return True
-
-    def game_flow(self, player1, player2):
-
-        self.turn_mechanics(player1, player2)
-
-        self.turn_mechanics(player2, player1)
