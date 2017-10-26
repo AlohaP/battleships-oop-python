@@ -77,12 +77,12 @@ class PlayBattleships():
                 square = player2.view.find_object(square.name)
                 square.hidden_ship = True
 
-    def boards_setup(self):
+    def boards_setup(self, player1, player2):
         ready_check = input('{} press Enter if youre ready '.format(self.player1.name))
-        self.create_player_ships(player1)
+        self.create_player_ships(self.player1)
         self.change_ships_to_hidden(self.player1, self.player2)
         ready_check = input('{} press Enter if youre ready '.format(self.player2.name))
-        self.create_player_ships(player2)
+        self.create_player_ships(self.player2)
         self.change_ships_to_hidden(self.player2, self.player1)
 
     def turn_mechanics(self, player1, player2):
@@ -110,11 +110,11 @@ class PlayBattleships():
         print('{} YOU WON!!! '.format(player.name))
 
 
-player1 = Player('Player1')
-player2 = Player('PLayer2')
+# player1 = Player('Player1')
+# player2 = Player('PLayer2')
 
-game = PlayBattleships(player1, player2)
-game.boards_setup()
-while True:
-    game.turn_mechanics(player1, player2)
-    game.turn_mechanics(player2, player1)
+# game = PlayBattleships(player1, player2)
+# game.boards_setup()
+# while True:
+# game.turn_mechanics(player1, player2)
+# game.turn_mechanics(player2, player1)
