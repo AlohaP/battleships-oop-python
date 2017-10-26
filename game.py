@@ -115,11 +115,7 @@ class PlayBattleships():
 
         self.turn_mechanics(player1, player2)
 
-        self.check_if_warships_alive(player1, player2)
-
         self.turn_mechanics(player2, player1)
-
-        self.check_if_warships_alive(player2, player1)
 
 # player1 = Player('Player1')
 # player2 = Player('PLayer2')

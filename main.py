@@ -34,15 +34,22 @@ def main():
             game.boards_setup(player1, player2)
 
             while True:
+                
+                game.turn_mechanics(player1, player2)
 
-                game.game_flow(player1, player2)
+                game_result = game.check_if_warships_alive(player1, player2)
 
-                if game.game_flow == True:
-                    print("You won")
+                if game_result is True:
+                    print('{} YOU WON!!! '.format(player1.name))
                     break
 
+                game.turn_mechanics(player2, player1)
 
+                game_result = game.check_if_warships_alive(player2, player1)
 
+                if game_result is True:
+                    print('{} YOU WON!!! '.format(player2.name))
+                    break                   
 
 
 def high_score():
