@@ -1,4 +1,3 @@
-
 from square import Square
 from player import Player
 from game import PlayBattleships
@@ -65,39 +64,38 @@ def main():
         if option == "1":
 
             difficulty_levels = ["easy", "medium", "hard"]
-            while True:
+            print_program_menu(difficulty)
+            difficulty_option = input("Select an difficulty: ")
+
+            if difficulty_option in ["0", "1", "2"]:
                 player1 = Player(input("Please enter your name: "))
                 cpu1 = Player("CPU1")
-                print_program_menu(difficulty)
+                game = PlayBattleshipsWithCPU(player1, cpu1, difficulty_levels[int(difficulty_option)])
+                game.boards_setup()
+                start_time = time.time()
 
-                difficulty_option = input("Select an difficulty")
+                while True:
+                    game.turn_mechanics(player1, cpu1)
+                    game_result = game.check_if_warships_alive(cpu1)
 
-                if difficulty_option in ["0", "1", "2"]:
-                    game = PlayBattleshipsWithCPU(player1, cpu1, difficulty_levels[int(difficulty_option)])
-                    game.boards_setup()
-                    start_time = time.time()
-                    while True:
-                        game.turn_mechanics(player1, cpu1)
-                        game_result = game.check_if_warships_alive(cpu1)
-                        if game_result is True:
-                            highscore_creation(game, player1, start_time)
-                            break
+                    if game_result is True:
+                        highscore_creation(game, player1, start_time)
+                        break
 
-                        game.turn_mechanics(cpu1, player1)
-                        game_result = game.check_if_warships_alive(player1)
-                        if game_result is True:
-                            highscore_creation(game, cpu1, start_time)
-                            break
-
-                else:
-                    print("Wrong input")
-                    continue
+                    game.turn_mechanics(cpu1, player1)
+                    game_result = game.check_if_warships_alive(player1)
+                    if game_result is True:
+                        highscore_creation(game, cpu1, start_time)
+                        break
 
         if option == '2':
             howtoplay.instructions_display()
 
         if option == '3':
             high_score_presentation()
+
+        if option == '4':
+            quit()
 
 
 def high_score_export(player, filename='highscores.txt', mode='ab'):

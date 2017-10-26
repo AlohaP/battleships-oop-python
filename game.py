@@ -25,7 +25,7 @@ class PlayBattleships():
             ship_list.remove(ship)
 
     def create_player_ships(self, player):
-        
+
         os.system('clear')
         ship_list = [("Destroyer", '2'), ("Submarine", '3'), ("Cruiser", '3'), ('Battleship', '4'), ('Carrier', '5')]
         os.system('clear')
@@ -48,7 +48,7 @@ class PlayBattleships():
                             if self.placement_validation(ship_list, player, player_ship, ship) is False:
                                 print('>>>>> Wrong input <<<<<')
                                 continue
-                        except IndexError:
+                        except IndexError or ValueError:
                             print('>>>>> Wrong input <<<<<')
                             continue
                         break
@@ -59,7 +59,7 @@ class PlayBattleships():
                             if self.placement_validation(ship_list, player, player_ship, ship) is False:
                                 print('>>>>> Wrong input <<<<<')
                                 continue
-                        except IndexError:
+                        except IndexError or ValueError:
                             print('>>>>> Wrong input <<<<<')
                             continue
                         break

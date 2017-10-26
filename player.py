@@ -9,7 +9,6 @@ class Player:
     def __init__(self, name):
         self.warships = []
         self.highscore = []
-        # self.warships = ['Destroyer', 'Submarine', 'Cruiser', 'Battleship', 'Carrier']
         self.name = name
         self.board = Ocean()
         self.board.read_board_from_file()

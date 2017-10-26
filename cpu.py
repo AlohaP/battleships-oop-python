@@ -90,6 +90,7 @@ class PlayBattleshipsWithCPU(PlayBattleships):
 
         if self.difficulty == "easy":
             return self.get_random_cords(False)
+
         if self.difficulty == "medium" or self.difficulty == "hard":
 
             if not self.hitted_and_not_sunk_cords:
@@ -106,7 +107,7 @@ class PlayBattleshipsWithCPU(PlayBattleships):
 
                     while True:
                         shoot = self.get_random_cords(False)
-                        
+
                         if self.player1.board.find_object(shoot).sign == "@":
                             self.hitted_and_not_sunk_cords.append(shoot)
                             self.hitted_and_not_sunk_cords = sorted(self.hitted_and_not_sunk_cords)
@@ -128,10 +129,10 @@ class PlayBattleshipsWithCPU(PlayBattleships):
                 try:
                     ship_cord = self.get_random_cords(True)
                     cpu_ship = cpu.get_ship_coordinates(ship, ship_cord, random.choice([True, False]))
-                    
+
                     if not cpu.validate_if_ship_is_near(cpu_ship):
                         continue
-                    
+
                     else:
                         cpu_ship.change_squares_to_ship()
                         ship_list.remove(ship)
@@ -143,7 +144,7 @@ class PlayBattleshipsWithCPU(PlayBattleships):
 
                 except AttributeError:
                     continue
-                
+
     def boards_setup(self):
         ready_check = input('{} press Enter if youre ready '.format(self.player1.name))
         self.create_player_ships(self.player1)
@@ -174,7 +175,6 @@ class PlayBattleshipsWithCPU(PlayBattleships):
 
         if not player2.warships:
             self.player_victory(player1)
-
 
     def player_victory(self, player):
         os.system("clear")

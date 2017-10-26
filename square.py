@@ -21,4 +21,3 @@ class Square():
 
     def change_to_sunk(self):
         self.sunk = True
-
