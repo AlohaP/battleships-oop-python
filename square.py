@@ -1,8 +1,5 @@
 class Square():
 
-    R = '\033[31m' # red
-    W = '\033[0m'  # white (normal)
-
     def __init__(self, sign, name):
         self.sign = sign
         self.name = name

@@ -59,16 +59,19 @@ class Player:
 
         if square.sign == ".":
             return True
+
         else:
             return False
 
     def validate_if_ship_is_near(self, ship):
+
         chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', "#"]
         check_if_place = []
         for coordinate in ship.coordinates:
             cord = list(coordinate.name)
             cord[1] = int(cord[1])
             index = chars.index(cord[0])
+
             for index in range(chars.index(cord[0])-1, chars.index(cord[0])+2):
                 square = self.board.find_object("".join([chars[index], str(cord[1] + 1)]))
                 square1 = self.board.find_object("".join([chars[index], str(cord[1] - 1)]))
@@ -76,6 +79,7 @@ class Player:
                 check_if_place.append(self.check_if_square_sign_dot(square))
                 check_if_place.append(self.check_if_square_sign_dot(square1))
                 check_if_place.append(self.check_if_square_sign_dot(square2))
+
         return self.check_if_validate_positive(check_if_place)
 
     def check_if_validate_positive(self, validation_table):
