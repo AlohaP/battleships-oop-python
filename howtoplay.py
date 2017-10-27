@@ -15,7 +15,7 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______    
                        \ \_______\ \__\ \__\   \ \__\     \ \__\ \ \_______\ \_______\____\_\  \ \__\ \__\     ____\_\  \ 
                         \|_______|\|__|\|__|    \|__|      \|__|  \|_______|\|_______|\_________\|__|\|__|    |\_________'
                                                                                      \|_________|             \|_________''')
-print('''1) How to play:
+    print('''1) How to play:
 
 The object of this game is to try and sink all of the other player's before they sink all of your ships!
 You have access to two boards, one displays your ships, other one shows your guesses.
